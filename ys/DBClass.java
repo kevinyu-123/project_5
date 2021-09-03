@@ -1,4 +1,4 @@
-package db;
+package ys;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,7 +29,7 @@ public class DBClass {
 			Connection con = DriverManager.getConnection(url, id, pwd);
 //			System.out.println("연결 되나요? ?");
 			
-			String sql = "select * from memmanage";
+			String sql = "SELECT * FROM memmanage";
 			PreparedStatement ps = con.prepareStatement(sql);
 			
 			ResultSet rs = ps.executeQuery();
@@ -54,7 +54,7 @@ public class DBClass {
 	}
 	
 	public int deleteDB (String id) {
-		String sql = "delete from memmanage where id = ? ";
+		String sql = "DELETE FROM memmanage WHERE id = ? ";
 		int result = 0;
 		
 		try {
