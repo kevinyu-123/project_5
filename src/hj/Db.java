@@ -14,13 +14,6 @@ public class Db {
 	private String id = "five";
 	private String pwd = "oracle";
 
-	public Db() {
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	public ArrayList<MemDTO> findAll() {
 		ArrayList<MemDTO> list = new ArrayList<MemDTO>();
 		MemDTO dto = null;
