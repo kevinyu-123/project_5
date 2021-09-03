@@ -3,9 +3,12 @@ package main;
 import java.util.ArrayList;
 
 import java.util.Scanner;
+
+import day20_DB.StudentDTO;
 import han.addMembership;
 import dto.MemDTO;
 import hj.Db;
+import js.DbClass;
 import ys.DBClass;
 import eun.EunDB;
 
@@ -16,6 +19,7 @@ public class mainClass {
 		String id, name, address, gender, info;
 		int age, num, sel;
 		Db hj = new Db();
+		DbClass js = new DbClass();
 		addMembership add = new addMembership();
 		DBClass db = new DBClass();
 		EunDB dbee = new EunDB();
@@ -37,6 +41,16 @@ public class mainClass {
 				hj.show(list);
 				break;
 			case 3:
+				System.out.println("검색 id 입력");
+				id = scan.next();
+				MemDTO dto = js.searchO(id);
+				if(dto != null) {
+				System.out.println("id : "+dto.getId());
+				System.out.println("name : "+dto.getName());
+				System.out.println("age : "+dto.getAge());
+				}else {
+					System.out.println("해당 아이디는 존재하지 않습니다.");
+				}
 				break;
 			case 4:
 				dbee.update();

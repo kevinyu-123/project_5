@@ -45,8 +45,8 @@ public class MemDTO {
 		return num;
 	}
 
-	public void setNum(String num) {
-		this.num = num;
+	public void setNum(String i) {
+		this.num = i;
 	}
 
 	public String getAddress() {
