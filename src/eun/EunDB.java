@@ -3,16 +3,15 @@ package eun;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import dto.MemDTO;
-import main.STU;
 
 public class EunDB {
 	private String url = "jdbc:oracle:thin:@210.221.253.215:1521:xe";
-	private String id = "eun";
-	private String pwd = "asd";
+	private String id = "five";
+	private String pwd = "oracle";
 
 	public EunDB() {
 		try {
@@ -23,22 +22,48 @@ public class EunDB {
 		}
 
 	}
+	
+	public MemDTO search(String id) { // 검색기능메소드
+		String sql = "select * from memmanage where id = '" + id + "'";
+		MemDTO dto = null;
+		try {
+			Connection con = DriverManager.getConnection(url, this.id, pwd);
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) { 
+				dto = new MemDTO();
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setAge(rs.getInt("age"));
+				dto.setNum(rs.getInt("num"));
+				
+				dto.setAddress(rs.getString("address"));
+				dto.setGender(rs.getString("gender"));
+				dto.setInfo(rs.getString("info"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
 
-	public int alterData(String updateid, String gender, String name, int age, int num, String address, String info) {
+	public int alterData(String id, String gender, String name, int age, int num, String address, String info) {
 		int result = 0;
-		String sql = "update memmanage set name= ? ,age=? ,gender=?,num=?,address=?,info=? where id = ? ";
+		String sql = "update memmanage set name= ? ,age=? ,gender=?,num=?,address=?,info=? where id =? ";
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			con = DriverManager.getConnection(url, id, pwd);
+			con = DriverManager.getConnection(url, this.id, pwd);
 			ps = con.prepareStatement(sql);
-			ps.setString(3, gender);
+			
+			ps.setString(7,id);
 			ps.setString(1, name);
 			ps.setInt(2, age);
+			ps.setString(3, gender);
 			ps.setInt(4, num);
 			ps.setString(5, address);
 			ps.setString(6, info);
-			ps.setString(7, updateid);
+			
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,7 +83,7 @@ public class EunDB {
 	}
 
 	public void update() {
-		String id1, name, gender, address, info;
+		String id, name, gender, address, info;
 		int age, num;
 		int result = 0;
 		Scanner input = new Scanner(System.in);
@@ -66,22 +91,20 @@ public class EunDB {
 		EunDB db = new EunDB();
 		
 		System.out.print("수정하려면 id 입력하세요 : ");
-		id1 = input.next();
-
-		for (int i = 0; i < arr.size(); i++) {
-			MemDTO m = arr.get(i);
-			if (id1.equals(m.getId())) {
-				System.out.println("-----------저장된 정보--------------");
-				System.out.println("학생 이름 : " + arr.get(i).getName());
-				System.out.println("학생 나이 : " + arr.get(i).getAge());
-				System.out.println("학생 전화번호 : " + arr.get(i).getNum());
-				System.out.println("학생 성별 : " + arr.get(i).getGender());
-				System.out.println("학생 주소: " + arr.get(i).getAddress());
-				System.out.println("학생 info: " + arr.get(i).getInfo());
-				System.out.println("---------------------------------");
-
+		id= input.next();
+		MemDTO dto = db.search(id);
+		if (dto != null) {
+			System.out.println("-----------"+id+"님의 저장된 정보---------");
+			System.out.println("학생 이름 : " + dto.getName());
+			System.out.println("학생 나이 : " +dto.getAge());
+			System.out.println("학생 전화번호 : " + dto.getNum());
+			System.out.println("학생 성별 : " + dto.getGender());
+			System.out.println("학생 주소: " + dto.getAddress());
+			System.out.println("학생 info: " + dto.getInfo());
+			System.out.println("---------------------------------");
+		
 				System.out.println("수정할 아이디 입력");
-				id1 = input.next();
+				id = input.next();
 				System.out.println("수정(변경)할 이름");
 				name = input.next();
 				System.out.println("수정(변경)할 나이");
@@ -104,9 +127,10 @@ public class EunDB {
 				}
 
 			} 
-			if (id1.contains(m.getId()) != true) {
-				System.out.println("존재하지 않는 아이디입니다.");
-			}
+		else {
+			System.out.println("해당 아이디는 존재하지 않습니다");
+		}
+		
 		}
 	}
-}
+
