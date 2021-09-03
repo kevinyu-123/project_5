@@ -39,7 +39,7 @@ public class DBClass {
 				mem.setName(rs.getString("name"));
 				mem.setAge(rs.getInt("age"));
 				mem.setGender(rs.getString("gender"));
-				mem.setNum(rs.getInt("num"));
+				mem.setNum(rs.getString("num"));
 				mem.setAddress(rs.getString("address"));
 				mem.setInfo(rs.getString("info"));
 				

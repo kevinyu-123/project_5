@@ -48,7 +48,7 @@ public class addMembershipDB {
 		return 0;
 	}
 	public int addMembershipDB(String userId,String userName,int userAge,String userGender,
-			int userNum,String userAddress,String userInfo) {
+			String userNum,String userAddress,String userInfo) {
 		try {
 			con = DriverManager.getConnection(url, id, pwd);
 			sql = "insert into MEMMANAGE values(?,?,?,?,?,?,?)";
@@ -57,7 +57,7 @@ public class addMembershipDB {
 			ps.setString(2, userName);
 			ps.setInt(3, userAge);
 			ps.setString(4, userGender);
-			ps.setInt(5, userNum);
+			ps.setString(5, userNum);
 			ps.setString(6, userAddress);
 			ps.setString(7, userInfo);
 			return result = ps.executeUpdate();

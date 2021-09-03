@@ -25,7 +25,7 @@ public class addMembership { //회원 추가 메소드
 			dto.setGender(sc.next());
 			sc.nextLine();
 			System.out.println("전화번호를 입력해 주세요");
-			dto.setNum(sc.nextInt());
+			dto.setNum(sc.next());
 			sc.nextLine();
 			System.out.println("주소를 입력해 주세요");
 			dto.setAddress(sc.nextLine());

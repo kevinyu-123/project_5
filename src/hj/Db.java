@@ -35,7 +35,7 @@ public class Db {
 				dto.setName(rs.getString("name"));
 				dto.setAge(rs.getInt("age"));
 				dto.setGender(rs.getString("gender"));
-				dto.setNum(rs.getInt("num"));
+				dto.setNum(rs.getString("num"));
 				dto.setAddress(rs.getString("address"));
 				dto.setInfo(rs.getString("info"));
 				list.add(dto);
