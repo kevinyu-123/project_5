@@ -6,6 +6,10 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/YeongSoo/Desktop/오라클/ojdbc6.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/USER/Downloads/ojdbc6.jar"/>
+>>>>>>> ba1adbb98cda3ac47b2f192ee1bab32a2d26c33b
 	<classpathentry kind="output" path="bin"/>
 </classpath>
