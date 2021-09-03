@@ -1,8 +1,6 @@
 /.classpath
 /.project
 /.settings/
-/dto/
 /han/
-/hj/
-/sql/
 /src/
+/main/
