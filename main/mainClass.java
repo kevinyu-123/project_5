@@ -1,11 +1,13 @@
 package main;
 
 import java.util.ArrayList;
+
 import java.util.Scanner;
 import han.addMembership;
 import dto.MemDTO;
 import hj.Db;
 import ys.DBClass;
+import eun.EunDB;
 
 public class mainClass {
 	public static void main(String[] args) {
@@ -16,6 +18,7 @@ public class mainClass {
 		Db hj = new Db();
 		addMembership add = new addMembership();
 		DBClass db = new DBClass();
+		EunDB dbee = new EunDB();
 		int result = 0;
 		
 		System.out.println("---멤버관리 프로그램---");
@@ -36,6 +39,7 @@ public class mainClass {
 			case 3:
 				break;
 			case 4:
+				dbee.update();
 				break;
 			case 5:
 				//회원 삭제기능 추가
