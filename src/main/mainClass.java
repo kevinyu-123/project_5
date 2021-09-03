@@ -1,14 +1,11 @@
 package main;
 
 import java.util.ArrayList;
-
+import js.DbClass;
 import java.util.Scanner;
-
-import day20_DB.StudentDTO;
 import han.addMembership;
 import dto.MemDTO;
 import hj.Db;
-import js.DbClass;
 import ys.DBClass;
 import eun.EunDB;
 
@@ -43,11 +40,9 @@ public class mainClass {
 			case 3:
 				System.out.println("검색 id 입력");
 				id = scan.next();
-				MemDTO dto = js.searchO(id);
-				if(dto != null) {
-				System.out.println("id : "+dto.getId());
-				System.out.println("name : "+dto.getName());
-				System.out.println("age : "+dto.getAge());
+				list = js.find(id);
+				if(id != null) {
+				
 				}else {
 					System.out.println("해당 아이디는 존재하지 않습니다.");
 				}
