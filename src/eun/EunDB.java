@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import dto.MemDTO;
+import main.STU;
 
-public class DB {
+public class EunDB {
 	private String url = "jdbc:oracle:thin:@210.221.253.215:1521:xe";
-	private String id = "five";
-	private String pwd = "oracle";
+	private String id = "eun";
+	private String pwd = "asd";
 
-	public DB() {
+	public EunDB() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -23,7 +24,7 @@ public class DB {
 
 	}
 
-	public int alterData(String id, String gender, String name, int age, int num, String address, String info) {
+	public int alterData(String updateid, String gender, String name, int age, int num, String address, String info) {
 		int result = 0;
 		String sql = "update memmanage set name= ? ,age=? ,gender=?,num=?,address=?,info=? where id = ? ";
 		Connection con = null;
@@ -37,6 +38,7 @@ public class DB {
 			ps.setInt(4, num);
 			ps.setString(5, address);
 			ps.setString(6, info);
+			ps.setString(7, updateid);
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -54,18 +56,21 @@ public class DB {
 		return result;
 
 	}
+
 	public void update() {
-		String id, name, gender, address, info;
+		String id1, name, gender, address, info;
 		int age, num;
 		int result = 0;
 		Scanner input = new Scanner(System.in);
-		ArrayList<MemDTO> arr = null;
-		DB db = new DB();
-		System.out.print("수정할 id : ");
-		id = input.next();
+		ArrayList<MemDTO> arr = new ArrayList<MemDTO>();
+		EunDB db = new EunDB();
+		
+		System.out.print("수정하려면 id 입력하세요 : ");
+		id1 = input.next();
+
 		for (int i = 0; i < arr.size(); i++) {
 			MemDTO m = arr.get(i);
-			if (m.equals(m.getId())) {
+			if (id1.equals(m.getId())) {
 				System.out.println("-----------저장된 정보--------------");
 				System.out.println("학생 이름 : " + arr.get(i).getName());
 				System.out.println("학생 나이 : " + arr.get(i).getAge());
@@ -74,9 +79,9 @@ public class DB {
 				System.out.println("학생 주소: " + arr.get(i).getAddress());
 				System.out.println("학생 info: " + arr.get(i).getInfo());
 				System.out.println("---------------------------------");
-				
+
 				System.out.println("수정할 아이디 입력");
-				this.id = input.next();
+				id1 = input.next();
 				System.out.println("수정(변경)할 이름");
 				name = input.next();
 				System.out.println("수정(변경)할 나이");
@@ -95,15 +100,13 @@ public class DB {
 				if (result == 1) {
 					System.out.println("정상적으로 수정 되었습니다");
 				} else {
-					System.out.println("해당하는 아이디는 존재하지 않습니다.(수정실패)");
+					System.out.println("(수정실패)");
 				}
 
-			} else {
-				System.out.println("존재하지 않는 학번입니다.");
+			} 
+			if (id1.contains(m.getId()) != true) {
+				System.out.println("존재하지 않는 아이디입니다.");
 			}
 		}
-
-		
 	}
-
 }
