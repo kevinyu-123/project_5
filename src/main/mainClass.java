@@ -40,9 +40,16 @@ public class mainClass {
 			case 3:
 				System.out.println("검색 id 입력");
 				id = scan.next();
-				list = js.find(id);
-				if(id != null) {
-				
+				MemDTO dto = js.searchM(id);
+				if( dto != null) {
+					
+					System.out.println(dto.getId());
+					System.out.println(dto.getName());
+					System.out.println(dto.getAge());
+					System.out.println(dto.getGender());
+					System.out.println(dto.getNum());
+					System.out.println(dto.getAddress());
+					System.out.println(dto.getInfo());
 				}else {
 					System.out.println("해당 아이디는 존재하지 않습니다.");
 				}
