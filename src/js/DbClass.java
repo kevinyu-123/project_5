@@ -22,13 +22,13 @@ public class DbClass {
 			e.printStackTrace();
 		}
 	}
-		public ArrayList<MemDTO> find(String id) {
+		public MemDTO searchM(String id) {
 			ArrayList<MemDTO> list = new ArrayList<MemDTO>();
 			MemDTO dto = null;
-			String sql = "select * from memMangage where id = '"+id+"'";
+			String sql = "select * from MEMMANAGE where id = '"+id+"'";
 			try {
 				Connection con = DriverManager.getConnection(url,this.id,pwd);
-				//System.out.println("연결확인");
+				System.out.println("연결확인");
 				PreparedStatement ps = con.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery();
 				if(rs.next()) {
@@ -45,7 +45,7 @@ public class DbClass {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return list;
+			return dto;
 			
 		}
 }
